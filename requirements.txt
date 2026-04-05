@@ -1,0 +1,17 @@
+# Core RAG Pipeline
+pypdf
+faiss-cpu
+sentence-transformers
+google-generativeai
+python-dotenv
+numpy
+
+# LangChain & LangGraph (For future implementation)
+langchain
+langchain-community
+langchain-google-genai
+langgraph
+
+# Utils
+tqdm
+ipykernel # For Jupyter Notebook support if needed

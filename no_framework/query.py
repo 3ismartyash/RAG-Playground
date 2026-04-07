@@ -4,10 +4,10 @@ import numpy as np
 import pickle
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
 # --- CONFIG ---
-load_dotenv()
+load_dotenv(find_dotenv())
 INDEX_PATH = "vector_index.faiss"
 CHUNKS_PATH = "chunks.pkl"
 MODEL_NAME = "all-MiniLM-L6-v2"

@@ -1,5 +1,6 @@
 import os
-from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -9,12 +10,12 @@ from dotenv import load_dotenv, find_dotenv
 # --- CONFIG ---
 load_dotenv(find_dotenv())
 INDEX_PATH = "faiss_index"
-GEMINI_MODEL = "gemini-1.5-flash" # The updated model name
+GEMINI_MODEL = "gemini-flash-latest" # The updated model name
 
 def query_system():
     # 1. Load Embeddings and Vector Store
     print("📦 Loading vector store...")
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
     # allow_dangerous_deserialization=True is required for loading local pickle-based FAISS
     vector_store = FAISS.load_local(INDEX_PATH, embeddings, allow_dangerous_deserialization=True)

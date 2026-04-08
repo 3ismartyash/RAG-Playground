@@ -13,9 +13,9 @@ In **Stage 3 (LangGraph)**, we treat each Step as a **Node** in a graph:
 - **`retrieve` Node**: Responsible solely for fetching data.
 - **`generate` Node**: Responsible solely for reasoning over the data.
 
-### Why use a Graph?
+### Why use a Graph for RAG?
 - **Modularity**: Nodes can be tested independently.
-- **Cyclic Logic**: In more advanced versions, if the `generate` node decides it doesn't have enough information, it can send an edge **back** to the `retrieve` node to try again.
+- **Decision Logic**: In this implementation, we added a **Grader** node. If the retrieved documents aren't relevant to your question, the graph *decides* to use a fallback message rather than hallucinating an answer.
 - **State Management**: The graph maintains a shared `AgentState` object that flows between nodes, collecting data at each step.
 
 ---
@@ -26,7 +26,7 @@ In **Stage 3 (LangGraph)**, we treat each Step as a **Node** in a graph:
     ```powershell
     ..\venv\Scripts\activate
     ```
-2.  **Add API Key**: Ensure your `.env` is set up with `GOOGLE_API_KEY`. (You can copy the one from `no_framework`)
+2.  **Add API Key**: Ensure your `.env` is set up with `GOOGLE_API_KEY`.
 3.  **Run Ingestion**:
     ```powershell
     python ingestion.py
@@ -39,10 +39,16 @@ In **Stage 3 (LangGraph)**, we treat each Step as a **Node** in a graph:
 ---
 
 ## 🏗️ Graph Structure in this Project
+
 ```mermaid
-graph LR
+graph TD
     Start --> Retrieve_Node
-    Retrieve_Node --> Generate_Node
+    Retrieve_Node --> Grade_Node
+    Grade_Node -- "Relevant" --> Generate_Node
+    Grade_Node -- "Irrelevant" --> Fallback_Node
     Generate_Node --> End
+    Fallback_Node --> End
 ```
-In this simple implementation, the path is linear, but you're now set up with the foundation to add loops and conditional logic!
+
+In this Stage 3 implementation, we've moved beyond linear chains to a **Decision-based Workflow**!
+

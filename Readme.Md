@@ -9,11 +9,21 @@ This project is a multi-stage journey to mastering **RAG (Retrieval-Augmented Ge
 ### Stage 1: [No-Framework Approach](./no_framework/)
 Understand the low-level mechanics of PDF chunking, embedding generation using local models, and similarity search logic with **FAISS**. This is built using raw Python logic and calls only the final model from Google's Gemini SDK.
 
-### Stage 2: [LangChain Implementation](./langchain/) (Coming Soon)
-A more abstracted approach using **LangChain's** modular chains and loaders. We'll simplify the code while still maintaining full control over the retrieval process.
+### Stage 2: [LangChain Implementation](./langchain/)
+A more abstracted approach using **LangChain's** modular chains and loaders. We simplify the code while still maintaining full control over the retrieval process.
 
-### Stage 3: [LangGraph Workflow](./langGraph/) (Coming Soon)
-Advanced implementation using **LangGraph** to model the RAG pipeline as a stateful, cyclic graph. This will introduce more complex reasoning, error-correction, and agents.
+### Stage 3: [LangGraph Workflow](./langGraph/)
+Advanced implementation using **LangGraph** to model the RAG pipeline as a stateful, cyclic graph. This introduces more complex reasoning, error-correction, and agents using a node-based architecture.
+
+---
+
+## 🔍 Database Inspection & Raw Vector Analysis
+
+To help you understand exactly how your data is stored "under the hood," we've added several diagnostic tools in the root directory:
+
+*   **[`inspect_pickle.py`](./inspect_pickle.py)**: Loads the serialized text chunks from the `no_framework` directory so you can read the raw text after splitting.
+*   **[`inspect_faiss.py`](./inspect_faiss.py)**: Automatically detects and loads any of your three FAISS databases (No-Framework, LangChain, or LangGraph) to show you the number of vectors and their corresponding text/metadata.
+*   **[`raw_vectors.py`](./raw_vectors.py)**: The "deep dive" tool. It extracts the actual **reconstructed vectors** (NumPy arrays of size 384) from the FAISS binary so you can see the mathematical "coordinates" of your data.
 
 ---
 
@@ -57,8 +67,13 @@ The project uses the following key libraries:
 Sample_prj/
 ├── venv/                   # Shared virtual environment
 ├── requirements.txt        # Shared dependencies
-├── Readme.Md               # Project Overview (This file)
+├── README.md               # Project Overview (This file)
 ├── Gate Data Science And AI.pdf  # Source data
+│
+├── inspect_faiss.py        # Diagnostic: Inspect FAISS text/metadata
+├── inspect_pickle.py       # Diagnostic: Inspect raw text chunks
+├── raw_vectors.py          # Diagnostic: View actual mathematical vectors
+│
 ├── no_framework/           # Stage 1: Low-level implementation
 ├── langchain/              # Stage 2: Abstracted chain implementation
 └── langGraph/              # Stage 3: Stateful graph/agent implementation

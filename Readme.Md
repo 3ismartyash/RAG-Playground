@@ -15,6 +15,9 @@ A more abstracted approach using **LangChain's** modular chains and loaders. We 
 ### Stage 3: [LangGraph Workflow](./langGraph/)
 Advanced implementation using **LangGraph** to model the RAG pipeline as a stateful, cyclic graph. This introduces more complex reasoning, error-correction, and agents using a node-based architecture.
 
+### Stage 4: [LangChain Extraction](./langExtract/)
+Introduction to **Information Extraction**. Instead of chatting with the PDF, we use LangChain's structured output features to transform unstructured text into clean, machine-readable JSON data.
+
 ---
 
 ## 🔍 Database Inspection & Raw Vector Analysis
@@ -76,5 +79,6 @@ Sample_prj/
 │
 ├── no_framework/           # Stage 1: Low-level implementation
 ├── langchain/              # Stage 2: Abstracted chain implementation
-└── langGraph/              # Stage 3: Stateful graph/agent implementation
+├── langGraph/              # Stage 3: Stateful graph/agent implementation
+└── langExtract/            # Stage 4: Structured Information Extraction
 ```

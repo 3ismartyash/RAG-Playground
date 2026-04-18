@@ -6,6 +6,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # --- SETTINGS ---
 # Uncomment ONLY ONE of these three:
+#INDEX_PATH = os.path.join("langExtract", "faiss_index") 
 INDEX_PATH = os.path.join("langGraph", "faiss_index") 
 #INDEX_PATH = os.path.join("langchain", "faiss_index")
 #INDEX_PATH = os.path.join("no_framework", "vector_index.faiss")
